@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ticket Details List</h1>
+<br>
+    <table>
+       <thead>
+            <tr>
+                <th>Ticket Type</th>
+                <th>Ticket Status</th>
+                <th>From Airport</th>
+                <th>To Airport</th>
+                <th>Passenger Name</th>
+                <th>Departure Date</th>
+                <th>Departure Hour</th>
+                <th>Departure Gate</th>
+            </tr>
+            </thead>
+        <tbody>
+        {% for ticketDetail in ticketDetails %}
+        <tr>
+
+           {% for ticket in tickets %}
+                {% if ticket.ticketUuid == ticketDetail.ticketUuid %}
+                <td>{{ ticket.ticketType }}</td>
+                <td>{{ ticket.ticketStatus }}</td>
+                {% endif %}
+                {% endfor %}
+
+                 {% for airport in airports %}
+            {% if airport.airportUuid == ticketDetail.fromAirportUuid %}
+                <td>{{ airport.airportName }}</td>
+                {% endif %}
+                {% endfor %}
+                
+                 {% for airport in airports %}
+            {% if airport.airportUuid == ticketDetail.toAirportUuid %}
+                <td>{{ airport.airportName }}</td>
+                {% endif %}
+                {% endfor %}
+               
+                <td align=center>{{ ticketDetail.passangerDetailUuid }}</td>
+                <td align=center>{% if ticketDetail.boardingDate %}
+                {{ ticketDetail.boardingDate|date('Y-m-d') }}{% endif %}</td>
+                <td align=center>{% if ticketDetail.boardingTime %}
+
+                {{ ticketDetail.boardingTime|date('H:i:s') }}{% endif %}</td>
+
+                {% for airportGate in airportGates %}
+                   {% if airportGate.airportGateUuid == ticketDetail.airportGateUuid %}
+                   <td align=center>{{ airportGate.airportGateNo }}</td>
+                   {% endif %}
+                {% endfor %}
+
+                
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ticketdetails_show', { 'id': ticketDetail.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ticketdetails_edit', { 'id': ticketDetail.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ticketdetails_new') }}">Create a new ticketDetail</a>
+        </li>
+    </ul>
+{% endblock %}

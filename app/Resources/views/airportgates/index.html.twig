@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Airport Gates list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Airport Name</th>
+                <th>Airport Gate</th>
+            </tr>
+        </thead>
+        <tbody>
+        <br>
+        {% for airportGate in airportGates %}
+            <tr>
+            {% for airport in airports %}
+                {% if airport.airportUuid == airportGate.airportUuid %}
+                <td align=center>{{ airport.airportName }}</td>
+                {% endif %}
+                {% endfor %}
+                <td align=center>{{ airportGate.airportGateNo }}</td>
+
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('airportgates_show', { 'id': airportGate.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('airportgates_edit', { 'id': airportGate.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('airportgates_new') }}">Create a new airportGate</a>
+        </li>
+    </ul>
+{% endblock %}

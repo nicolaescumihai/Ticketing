@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Planeseat</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ planeSeat.id }}</td>
+            </tr>
+            <tr>
+                <th>Planeseatuuid</th>
+                <td>{{ planeSeat.planeSeatUuid }}</td>
+            </tr>
+            <tr>
+                <th>Planeuuid</th>
+                <td>{{ planeSeat.planeUuid }}</td>
+            </tr>
+            <tr>
+                <th>Planeseatname</th>
+                <td>{{ planeSeat.planeSeatName }}</td>
+            </tr>
+            <tr>
+                <th>Planeseatstatus</th>
+                <td>{{ planeSeat.planeSeatStatus }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('planeseats_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('planeseats_edit', { 'id': planeSeat.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

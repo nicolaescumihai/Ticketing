@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Airportgate</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ airportGate.id }}</td>
+            </tr>
+            <tr>
+                <th>Airportgateuuid</th>
+                <td>{{ airportGate.airportGateUuid }}</td>
+            </tr>
+            <tr>
+                <th>Airportuuid</th>
+                <td>{{ airportGate.airportUuid }}</td>
+            </tr>
+            <tr>
+                <th>Airportgateno</th>
+                <td>{{ airportGate.airportGateNo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('airportgates_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('airportgates_edit', { 'id': airportGate.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

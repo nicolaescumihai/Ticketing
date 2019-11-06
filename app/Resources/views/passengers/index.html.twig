@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Passengers list</h1>
+
+    <table>
+        <tbody>
+        {% for passenger in passengers %}
+            <tr>
+                <td><a href="{{ path('passengers_show', { 'id': passenger.id }) }}">{{ passenger.id }}</a></td>
+                <td>{{ passenger.firstName }}</td>
+                <td>{{ passenger.lastName }}</td>
+                <td>{{ passenger.nationality }}</td>
+                <td>{{ passenger.idCard }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('passengers_show', { 'id': passenger.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('passengers_edit', { 'id': passenger.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('passengers_new') }}">Create a new passenger</a>
+        </li>
+    </ul>
+{% endblock %}

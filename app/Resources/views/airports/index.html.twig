@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Airports list</h1>
+<br>
+    <table>
+        <thead>
+            <tr>
+                <th>Airport Name</th>
+                <th>Airport Short Name</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for airport in airports %}
+            <tr>
+                <td>{{ airport.airportName }}</td>
+                <td align=center>{{ airport.airportSjortName }}</td>
+                <td align=center>{{ airport.airportLocation }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('airports_show', { 'id': airport.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('airports_edit', { 'id': airport.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <ul>
+        <li>
+            <a href="{{ path('airports_new') }}">Create a new airport</a>
+        </li>
+    </ul>
+{% endblock %}

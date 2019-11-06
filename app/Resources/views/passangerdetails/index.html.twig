@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Passenger Details List</h1>
+
+    <table>
+    <thead>
+            <tr>
+                <th>Passenger Name</th>
+                <th>Company</th>
+                <th>Plane Model</th>
+                <th>Plane Seat</th>
+            </tr>
+            </thead>
+        <tbody>
+        {% for passangerDetail in passangerDetails %}
+            <tr>
+                
+                <td align=center>{{ passangerDetail.passengerUuid }}</td>
+
+                {% for plane in planes %}
+                    {% if plane.planeUuid == passangerDetail.planeUuid %}
+                    <td>{{ plane.company }}</td>
+                    <td>{{ plane.planeType }}</td>
+                    {% endif %}
+                {% endfor %}
+
+                {% for planeSeat in planeSeats %}
+                    {% if planeSeat.planeSeatUuid == passangerDetail.planeSeatUuid %}
+                    <td>{{ planeSeat.planeSeatName }}</td>
+                    {% endif %}
+                {% endfor %}
+
+
+                <td>{{ passangerDetail.class }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('passangerdetails_edit', { 'id': passangerDetail.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('passangerdetails_new') }}">Create a New Passenger Detail</a>
+        </li>
+    </ul>
+{% endblock %}

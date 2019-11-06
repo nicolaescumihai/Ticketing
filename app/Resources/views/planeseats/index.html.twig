@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Plane Seats list</h1>
+
+    <table>
+        <br>
+        </thead>
+        <tbody>
+        {% for planeSeat in planeSeats %}
+            <tr>
+                <td><a href="{{ path('planeseats_show', { 'id': planeSeat.id }) }}"></a></td>
+                <td>{{ planeSeat.planeSeatUuid }}</td>
+                <td>{{ planeSeat.planeUuid }}</td>
+                <td>{{ planeSeat.planeSeatName }}</td>
+                <td>{{ planeSeat.planeSeatStatus }}</td>
+                <td>
+                    <ul>
+                        <li>
+                         <br>   <a href="{{ path('planeseats_edit', { 'id': planeSeat.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('planeseats_new') }}">Create a new planeSeat</a>
+        </li>
+    </ul>
+{% endblock %}
